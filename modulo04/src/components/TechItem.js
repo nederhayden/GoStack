@@ -16,6 +16,7 @@ TechItem.defaultProps = {
   tech: "Oculto",
 };
 
+// Defini o tipo da variavel
 TechItem.propTypes = {
   tech: PropTypes.string,
   onDelete: PropTypes.func.isRequired
