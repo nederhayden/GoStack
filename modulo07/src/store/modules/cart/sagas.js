@@ -1,11 +1,28 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { addToCartSucess } from './actions';
+import { all, select, call, put, takeLatest } from 'redux-saga/effects';
+import { addToCartSucess, updateAmount } from './actions';
+import { formatPrice } from '../../../util/format';
 import api from '../../../services/api';
 
 function* addToCart({ id }) {
-    const response = yield call(api.get, `/products/${id}`);
+    const productExists = yield select((state) =>
+        state.cart.find((p) => p.id === id)
+    );
 
-    yield put(addToCartSucess(response.data));
+    if (productExists) {
+        const amount = productExists.amount + 1;
+
+        yield put(updateAmount(id, amount));
+    } else {
+        const response = yield call(api.get, `/products/${id}`);
+
+        const data = {
+            ...response.data,
+            amount: 1,
+            priceFormatted: formatPrice(response.data.price),
+        };
+
+        yield put(addToCartSucess(data));
+    }
 }
 
 export default all([takeLatest('@cart/ADD_REQUEST', addToCart)]);
