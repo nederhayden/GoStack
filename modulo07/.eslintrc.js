@@ -26,5 +26,9 @@ module.exports = {
         ],
         'import/prefer-default-export': 'off',
         'react/state-in-constructor': [0, 'always'],
+        'no-param-reassign': 'off',
+        'no-console': ['error', { allow: ['tron'] }],
+        'react/prop-types': 'off',
+        'arrow-body-style': 0,
     },
 };
