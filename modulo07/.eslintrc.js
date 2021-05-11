@@ -12,7 +12,7 @@ module.exports = {
         ecmaVersion: 12,
         sourceType: 'module',
     },
-    plugins: ['react', 'prettier'],
+    plugins: ['react', 'prettier', 'react-hooks'],
     rules: {
         'prettier/prettier': [
             'error',
@@ -30,5 +30,7 @@ module.exports = {
         'no-console': ['error', { allow: ['tron'] }],
         'react/prop-types': 'off',
         'arrow-body-style': 0,
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
     },
 };
